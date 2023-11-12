@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right, darkblue, darkgreen);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    .container {
+        width: 500px;
+        padding: 1rem 2rem;
+        background-color: white;
+        border-radius: 10px;
+
+        .title {
+            border-bottom: 2px solid black;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz {
+            padding: 1rem;
+
+            .question {
+                margin-bottom: 1rem;
+                font-size: 18px;
+            }
+            .answers {
+                list-style: none;
+
+                .answer {
+                    cursor: pointer;
+                    border: 1px solid darkblue;
+                    color: darkblue;
+                    padding: 1rem 0.5rem;
+                    margin-bottom: 1rem;
+                    border-radius: 10px;
+                    background: none;
+                    width: 100%;
+                    transition: all 0.5s ease-in-out;
+                    
+                    &.correct {
+                        background-color: lightgreen;
+                    }
+                    &.incorrect {
+                        background-color: lightcoral;
+                    }
+                    &:hover:not([disabled]) {
+                        background-color: darkblue;
+                        color: white;
+                    }
+                    &:disabled {
+                        cursor: no-drop;
+                    }
+
+                }
+            }
+            #btn_next {
+                padding: 1rem;
+                width: 200px;
+                margin: 0 auto;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: darkblue;
+                color: white;
+
+                &:active {
+                    background-color: #000053;
+                }
+            }
+        }
+    }
+
+}

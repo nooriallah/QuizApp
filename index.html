@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz App</title>
+
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="title">Quiz App</h1>
+            <div class="quiz">
+                <h2 class="question" id="question_title">
+                    Question here ?
+                </h2>
+                <ul class="answers">
+                    <!-- <li class="answer">Ans 1</li>
+                    <li class="answer">Ans 2</li>
+                    <li class="answer">Ans 3</li>
+                    <li class="answer">Ans 4</li> -->
+                </ul>
+                <div class="btn-next-container">
+                    <button type="button" id="btn_next">Next</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let questions = [
+            {
+                question: "Who is the best football player in the world ?",
+                answers: [
+                    { text: "Cristiano Ronaldo", isCorrect: true },
+                    { text: "Leonal Messi", isCorrect: false },
+                    { text: "Karim Benzima", isCorrect: false },
+                    { text: "Zainuddin Zaidan", isCorrect: false },
+                ]
+            },
+            {
+                question: "Which animal is bigger ?",
+                answers: [
+                    { text: "Lion", isCorrect: false },
+                    { text: "Elephent", isCorrect: true },
+                    { text: "Tiger", isCorrect: false },
+                    { text: "Zibra", isCorrect: false },
+                ]
+            },
+            {
+                question: "31 + 32 = ?",
+                answers: [
+                    { text: "64", isCorrect: false },
+                    { text: "60", isCorrect: false },
+                    { text: "61", isCorrect: false },
+                    { text: "63", isCorrect: true },
+                ]
+            },
+            {
+                question: "Whic one is capital of USA  ?",
+                answers: [
+                    { text: "California", isCorrect: false },
+                    { text: "Washigton.D.C", isCorrect: true },
+                    { text: "Paris", isCorrect: false },
+                    { text: "Berlin", isCorrect: false },
+                ]
+            },
+        ]
+
+
+        let questionElement = document.getElementById("question_title")
+        let answers = document.querySelector(".answers");
+        let btnNext = document.getElementById("btn_next");
+        let currentIndex = 0;
+        let score = 0;
+
+
+        function startQuiz() {
+            currentIndex = 0;
+            score = 0
+            btnNext.innerHTML = "Next"
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState()
+
+            let currentQuestion = questions[currentIndex]
+            let questionNo = currentIndex + 1
+            questionElement.innerHTML = questionNo + ". " + currentQuestion.question
+
+            currentQuestion.answers.forEach(answer => {
+                const button = document.createElement("button");
+                button.innerHTML = answer.text
+                button.classList.add("answer");
+
+                answers.appendChild(button)
+                if (answer.isCorrect) {
+                    button.dataset.isCorrect = answer.isCorrect
+                }
+
+                button.addEventListener("click", (evt) => {
+                    let btnSelected = evt.target
+                    let isCorrect = btnSelected.dataset.isCorrect === "true"
+                    if (isCorrect) {
+                        btnSelected.classList.add("correct")
+                        score++;
+                    } else {
+                        btnSelected.classList.add("incorrect")
+                    }
+
+                    Array.from(answers.children).forEach(button => {
+                        if (button.dataset.isCorrect === "true") {
+                            button.classList.add('correct')
+                        }
+                        button.disabled = true
+                    })
+                    btnNext.style.display = "block"
+                })
+
+            })
+        }
+        showQuestion()
+
+        function resetState() {
+            btnNext.style.display = "none";
+            while (answers.firstChild) {
+                answers.removeChild(answers.firstChild)
+            }
+        }
+
+
+        document.getElementById("btn_next").addEventListener("click", () => {
+            if (currentIndex < questions.length) {
+                currentIndex++;
+                if (currentIndex < questions.length) {
+                    showQuestion()
+                }
+                else {
+                    showScore();
+                }
+            } else {
+                startQuiz();
+            }
+        })
+
+        // thi show hide ansowers and show score 
+        function showScore() {
+            resetState()
+            questionElement.innerHTML = `You score ${score} out of ${questions.length}!`
+            btnNext.innerHTML = "Play again!"
+            btnNext.style.display = "block";
+        }
+
+
+    </script>
+
+</html>

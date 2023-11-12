@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, darkblue, darkgreen);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .container {
+  width: 500px;
+  padding: 1rem 2rem;
+  background-color: white;
+  border-radius: 10px;
+}
+body .container .title {
+  border-bottom: 2px solid black;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+body .container .quiz {
+  padding: 1rem;
+}
+body .container .quiz .question {
+  margin-bottom: 1rem;
+  font-size: 18px;
+}
+body .container .quiz .answers {
+  list-style: none;
+}
+body .container .quiz .answers .answer {
+  cursor: pointer;
+  border: 1px solid darkblue;
+  color: darkblue;
+  padding: 1rem 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background: none;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+body .container .quiz .answers .answer.correct {
+  background-color: lightgreen;
+}
+body .container .quiz .answers .answer.incorrect {
+  background-color: lightcoral;
+}
+body .container .quiz .answers .answer:hover:not([disabled]) {
+  background-color: darkblue;
+  color: white;
+}
+body .container .quiz .answers .answer:disabled {
+  cursor: no-drop;
+}
+body .container .quiz #btn_next {
+  padding: 1rem;
+  width: 200px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: darkblue;
+  color: white;
+}
+body .container .quiz #btn_next:active {
+  background-color: #000053;
+}
+
+/*# sourceMappingURL=style.css.map */
